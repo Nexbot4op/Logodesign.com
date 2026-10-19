@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مدیریت بنرها</title>
+<style>
+:root{--bg:#070d1f;--card:#0e2142;--line:#1b3a73;--blue:#2f8cff;--green:#19e6a0;--text:#e8f0ff;--mut:#8aa3d1;--red:#ff4d6d;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--text);padding:18px 16px 60px}
+.wrap{max-width:760px;margin:0 auto}
+h1{font-size:20px;margin:6px 0 14px}
+input,button{font-family:inherit;font-size:15px;color:var(--text)}
+input{width:100%;background:#0a1833;border:1.5px solid var(--line);border-radius:16px;padding:12px 14px}
+button{border:0;border-radius:14px;padding:10px 16px;cursor:pointer;font-weight:600;background:var(--blue);color:#fff}
+button.g{background:var(--green);color:#032a1f}button.r{background:var(--red)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:12px;min-width:0}
+.mut{color:var(--mut);font-size:13px;line-height:1.9}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.txt{white-space:pre-wrap;overflow-wrap:anywhere;margin:8px 0}
+.st{font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>مدیریت بنرهای تبلیغاتی</h1>
+  <div class="mut">کلید مدیریت همان مقدار ADMIN_KEY است که موقع اجرای سرور داده‌اید. بنرها تا تأیید شما برای کسی ارسال نمی‌شوند (مگر AD_AUTO_APPROVE=1 باشد).</div>
+  <div class="row"><input id="key" type="password" placeholder="کلید مدیریت" aria-label="کلید مدیریت" style="flex:1"><button id="go">نمایش بنرها</button></div>
+  <div id="msg" class="mut" role="status"></div>
+  <div id="list"></div>
+</div>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ST={pending:'در انتظار تأیید',approved:'در حال ارسال',done:'ارسال شد',rejected:'رد شد'};
+let key='';try{key=sessionStorage.getItem('adm')||''}catch(e){}
+$('#key').value=key;
+async function call(path,body){
+  const r=await fetch(path,{method:body?'POST':'GET',headers:{'x-admin-key':$('#key').value,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+  const j=await r.json().catch(()=>({error:'پاسخ نامعتبر'}));
+  if(!r.ok)throw new Error(j.error||'خطا');return j;
+}
+async function load(){
+  $('#msg').textContent='';
+  try{
+    const j=await call('/api/admin/banners');
+    try{sessionStorage.setItem('adm',$('#key').value)}catch(e){}
+    $('#list').innerHTML=j.banners.map(b=>`<div class="card"><div class="mut">از «${esc(b.ownerName||'بدون نام')}» · ${new Date(b.createdAt).toLocaleString('fa-IR')} · <span class="st">${ST[b.status]||b.status}</span></div><div class="txt">${esc(b.text)}</div>
+${b.status==='pending'?`<div class="row"><button class="g" data-a="approve" data-id="${esc(b.id)}">تأیید و ارسال</button><button class="r" data-a="reject" data-id="${esc(b.id)}">رد</button></div>`:`<div class="mut">ارسال‌شده ${b.stats.sent} · ردشده به‌دلیل محدودیت ${b.stats.skipped} · ناموفق ${b.stats.fail}</div>`}</div>`).join('')||'<div class="mut" style="margin-top:12px">بنری ثبت نشده است.</div>';
+    document.querySelectorAll('[data-a]').forEach(x=>x.onclick=async()=>{x.disabled=true;try{await call('/api/admin/banner',{id:x.dataset.id,action:x.dataset.a});await load()}catch(e){$('#msg').textContent=e.message;x.disabled=false}});
+  }catch(e){$('#msg').textContent=e.message}
+}
+$('#go').onclick=load;
+if(key)load();
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پنل ارماک</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+.tg{margin-bottom:10px}.tg .mut{margin:2px 6px 0}
+:root{--bg:#070d1f;--bg2:#0b1a33;--card:#0e2142;--line:#1b3a73;--blue:#2f8cff;--green:#19e6a0;--text:#e8f0ff;--mut:#8aa3d1;--red:#ff4d6d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;color:var(--text);min-height:100vh;
+background:radial-gradient(900px 500px at 85% -10%,#0f3a8a55,transparent),radial-gradient(700px 500px at 0% 110%,#0b6b5a55,transparent),linear-gradient(160deg,var(--bg),var(--bg2))}
+button,input,textarea,select{font-family:inherit;font-size:15px;color:var(--text)}
+.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:12px 16px;background:#070d1fcc;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .ttl{flex:1;font-weight:800;letter-spacing:.5px}
+.top .ttl span{color:var(--green)}
+.ibtn{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 13px;cursor:pointer}
+.ibtn:hover{border-color:var(--blue)}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 60px}
+.field,textarea,select,input[type=text],input[type=number],input[type=password]{width:100%;background:#0a1833;border:1.5px solid var(--line);border-radius:18px;padding:13px 16px;outline:none}
+textarea{min-height:110px;resize:vertical}
+.field:focus,textarea:focus,select:focus,input:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2f8cff33}
+.btn{border:0;border-radius:18px;padding:13px 20px;cursor:pointer;font-weight:600;background:linear-gradient(135deg,var(--blue),#1a5fd0);box-shadow:0 6px 20px #2f8cff44}
+.btn.g{background:linear-gradient(135deg,var(--green),#0aa57a);color:#032;box-shadow:0 6px 20px #19e6a033}
+.btn.o{background:transparent;border:1.5px solid var(--line);box-shadow:none}
+.btn.r{background:linear-gradient(135deg,var(--red),#c01e3f);box-shadow:none}
+.btn.s{padding:7px 12px;border-radius:12px;font-size:13px}
+.card{background:linear-gradient(180deg,#0f2447,#0b1b38);border:1px solid var(--line);border-radius:22px;padding:18px;margin-bottom:14px}
+h2{margin:6px 0 14px;font-size:20px}h3{margin:0 0 10px;font-size:16px}
+.mut{color:var(--mut);font-size:13px;line-height:1.9}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{aspect-ratio:1/.9;border-radius:24px;border:1px solid var(--line);background:linear-gradient(160deg,#10305f,#0b1b38);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:10px;transition:.15s;font-weight:600}
+.tile:hover{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 10px 30px #2f8cff33}
+.tile .ic{font-size:34px}
+.tile.wide{grid-column:span 2;aspect-ratio:auto;padding:18px}
+.prof{display:flex;align-items:center;gap:14px}
+.av{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--green));display:grid;place-items:center;font-size:24px;font-weight:800;color:#041}
+.tag{display:inline-block;background:#19e6a022;color:var(--green);border:1px solid #19e6a055;border-radius:99px;padding:2px 10px;font-size:12px;margin-inline-start:6px}
+.tag.b{background:#2f8cff22;color:#7db8ff;border-color:#2f8cff66}
+.row{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #1b3a7355}
+.row:last-child{border:0}
+.sw{position:relative;width:48px;height:28px;flex:none}
+.sw input{display:none}
+.sw i{position:absolute;inset:0;background:#1b2a4d;border-radius:99px;cursor:pointer;transition:.2s}
+.sw i:after{content:"";position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+i{background:var(--green)}
+.sw input:checked+i:after{right:23px}
+.stack>*+*{margin-top:10px}
+.flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.back{margin-bottom:10px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;background:var(--red);margin-inline-end:6px}.dot.on{background:var(--green);box-shadow:0 0 10px var(--green)}
+.drawer{position:fixed;inset:0;z-index:50;display:none}.drawer.open{display:block}
+.drawer .bk{position:absolute;inset:0;background:#000a}
+.drawer .pn{position:absolute;top:0;bottom:0;left:0;width:min(86vw,320px);background:var(--bg2);border-right:1px solid var(--line);padding:18px;overflow:auto}
+.mi{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:12px;padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);cursor:pointer;min-height:54px}
+.mi:hover{border-color:var(--green)}
+.chip{cursor:pointer;display:inline-block;margin:4px;padding:5px 12px;border-radius:99px;background:#2f8cff22;border:1px solid #2f8cff66;font-family:monospace;direction:ltr}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#112b57;border:1px solid var(--blue);padding:11px 18px;border-radius:16px;z-index:99;max-width:90vw}
+.log div{font-size:12.5px;color:var(--mut);padding:4px 0;border-bottom:1px dashed #1b3a7344}
+.u{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px 0;border-bottom:1px dashed #1b3a7355}
+details{margin-bottom:10px}summary{cursor:pointer;font-weight:600;padding:8px 0}
+.price{font-size:26px;font-weight:800;color:var(--green)}
+
+.bubble{background:#12356b;border-radius:18px 18px 4px 18px;padding:12px 14px;white-space:pre-wrap;line-height:1.8}
+.gb{display:block;width:100%;margin-top:6px;text-align:center;padding:9px;border-radius:12px;background:#ffffff14;border:1px solid #ffffff2a;color:var(--text)}
+.note{border:1px solid #2f8cff66;background:#2f8cff14;border-radius:16px;padding:12px 14px;font-size:13.5px;line-height:1.9;color:var(--text)}
+.kprow{display:flex;gap:6px;margin-top:6px}.kprow .gb{flex:1;width:auto;margin-top:0;min-width:0;overflow-wrap:anywhere}
+.lrow{padding:10px 0;border-bottom:1px dashed #1b3a7355}.lrow:last-child{border:0}
+.lb{flex:1;min-width:130px;background:#ffffff0d;border:1px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.vip{display:inline-block;font-size:11px;font-weight:800;letter-spacing:1.5px;direction:ltr;padding:2px 10px;border-radius:99px;color:#2b1d00;background:linear-gradient(135deg,#ffd76a,#f0a81c)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="top">
+  <button class="ibtn" id="exitBtn" style="display:none" title="خروج از حالت">⏏ خروج</button>
+  <div class="ttl">پنل <span>ارماک</span> · مدیریت ربات روبیکا</div>
+  <button class="ibtn" id="menuBtn" aria-label="منو">☰</button>
+</div>
+
+<div class="drawer" id="drawer"><div class="bk" id="dbk"></div><div class="pn">
+  <h3>منو</h3>
+  <button class="mi" data-go="shop"><span>🛒 فروشگاه</span><span class="tag">کاربردی</span></button>
+  <button class="mi" data-go="help"><span>📘 راهنمای راه‌اندازی</span><span class="tag">کاربردی</span></button>
+  <button class="mi" data-go="tags"><span>🏷️ تگ‌ها</span><span class="tag b">متن</span></button>
+  <button class="mi" id="miBanner" data-go="banner" hidden><span>بنر تبلیغاتی</span><span class="tag">تبلیغ</span></button>
+</div></div>
+
+<div class="wrap" id="view"></div>
+
+<script>
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let S={mode:null,token:localStorage.getItem('rb_token')||'',st:null,page:'login',poll:null};
+
+/* ---------- demo data ---------- */
+const demoState=()=>({me:{bot_title:'ربات نمونه',username:'demo_bot'},
+ settings:{privateWelcome:'سلام {name} 👋\nبه {bot} خوش اومدی!',welcome:{on:true,text:'سلام {name} 🌹 به گروه {group} خوش اومدی!'},goodbye:{on:false,text:'{name} رفت 👋'},rules:{text:'۱) احترام\n۲) بدون تبلیغ'},antispam:{on:true,max:5,seconds:10},antilink:{on:true},wordfilter:{on:false,words:[]},antiads:{on:false},warn:{max:3,action:'kick',onViolation:true},locks:{forward:false,file:false,sticker:false,contact:false,poll:false,location:false},auto:[],admins:[],glass:{}},
+ chats:[{id:'g0demo1',type:'group',title:'گروه گیمرها',rawTitle:'گروه گیمرها',users:[{id:'u0a1',name:'علی',warns:1,muted:false},{id:'u0a2',name:'سارا',warns:0,muted:false}]},{id:'b0demo1',type:'private',title:'',users:[]}],
+ status:{running:true,lastPoll:Date.now(),error:''},stats:{private:1,groups:1,channels:0},log:[{t:Date.now(),text:'نمونه: لینک حذف شد'}]});
+
+async function api(path,method='GET',body){
+  if(S.mode==='demo'){
+    if(method==='GET'||path==='/api/state') return S.st;
+    toast('حالت نمایشی است؛ تغییرات ذخیره نمی‌شود');
+    if(path==='/api/send'||path==='/api/glass') return {ok:1,fail:0};
+    return {ok:true};
+  }
+  const r=await fetch(path,{method,headers:{'Content-Type':'application/json','x-token':S.token},body:body?JSON.stringify(body):undefined});
+  const j=await r.json().catch(()=>({error:'پاسخ نامعتبر از سرور'}));
+  if(!r.ok){ if(r.status===401&&S.mode==='token'){exitMode(true)} throw new Error(j.error||'خطا'); }
+  return j;
+}
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),3200)}
+async function refresh(){ if(S.mode==='token'){ try{S.st=await api('/api/state')}catch(e){} } }
+async function save(patch,msg='ذخیره شد ✅'){
+  try{ await api('/api/settings','PUT',patch); if(S.mode==='token') await refresh(); else Object.assign(S.st.settings,patch); toast(msg);}catch(e){toast('❌ '+e.message)}
+}
+
+/* ---------- navigation ---------- */
+function go(p){S.page=p;render();window.scrollTo(0,0)}
+function exitMode(silent){
+  S.mode=null;S.st=null;S.page='login';clearInterval(S.poll);
+  localStorage.removeItem('rb_token');S.token='';
+  $('#exitBtn').style.display='none';render(); if(!silent) toast('به منوی ورود برگشتید');
+}
+$('#exitBtn').onclick=()=>exitMode();
+$('#menuBtn').onclick=()=>$('#drawer').classList.add('open');
+$('#dbk').onclick=()=>$('#drawer').classList.remove('open');
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{$('#drawer').classList.remove('open');go(b.dataset.go)});
+
+async function enter(mode,token){
+  if(mode==='demo'){S.mode='demo';S.st=demoState();}
+  else{
+    const r=await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token})});
+    const j=await r.json(); if(!r.ok) throw new Error(j.error||'ورود ناموفق');
+    S.mode='token';S.token=token;localStorage.setItem('rb_token',token);S.st=j;
+    clearInterval(S.poll);S.poll=setInterval(async()=>{await refresh(); if(['status','home'].includes(S.page)) render(true)},5000);
+  }
+  $('#exitBtn').style.display='';go('home');
+}
+
+/* ---------- views ---------- */
+const V={};
+const back=()=>`<button class="btn o s back" onclick="go('home')">→ بازگشت</button>`;
+const sw=(id,on)=>`<label class="sw"><input type="checkbox" id="${id}" ${on?'checked':''}><i></i></label>`;
+
+V.login=()=>`
+<div class="card stack"><h2>ورود به پنل</h2>
+<div class="note">با ورود، می‌پذیرید که ممکن است تبلیغات خریداری‌شده برای کاربران پیوی ربات شما ارسال شود. با خرید «ضد تبلیغات» از فروشگاه این تبلیغات برای ربات شما ارسال نمی‌شود، و کاربران با /stopads می‌توانند تبلیغ را قطع کنند.</div>
+<div class="mut">توکن ربات خودتان را از <b>@botfather</b> روبیکا (ربات «بات فادر») بگیرید و اینجا وارد کنید. نیازی به فیلترشکن یا پروکسی نیست.</div>
+<input class="field" id="tk" type="password" placeholder="توکن ربات" value="${esc(S.token)}" autocomplete="off">
+<div class="flex"><button class="btn g" id="goTok">ورود با توکن</button><button class="btn o" id="goDemo">حالت نمایشی</button></div>
+<div class="mut" id="err" style="color:var(--red)"></div></div>`;
+V.login.bind=()=>{
+  $('#goTok').onclick=async()=>{const b=$('#goTok');b.disabled=true;$('#err').textContent='';
+    try{await enter('token',$('#tk').value.trim())}catch(e){$('#err').textContent=e.message}b.disabled=false};
+  $('#goDemo').onclick=()=>enter('demo');
+};
+
+V.home=()=>{const m=S.st.me||{};const nm=m.bot_title||m.username||'ربات';
+return `<div class="card prof"><div class="av">${esc(nm[0]||'ا')}</div><div><b>${esc(nm)}</b><div class="mut">@${esc(m.username||'')} <span class="tag">مدیر پنل</span> ${S.mode==='demo'?'<span class="tag b">نمایشی</span>':''}</div></div></div>
+<div class="grid">
+<button class="tile" data-go2="status"><span class="ic">🟢</span>وضعیت ربات</button>
+<button class="tile" data-go2="pwelcome"><span class="ic">💬</span>خوش‌آمد پیوی</button>
+<button class="tile" data-go2="group"><span class="ic">🛡️</span>مدیریت گروه</button>
+<button class="tile" data-go2="send"><span class="ic">📨</span>ارسال پیام</button>
+<button class="tile" data-go2="forcejoin"><span class="ic">🔒</span>عضویت ضروری${vipBadge()}</button>
+<button class="tile" data-go2="layout"><span class="ic">🧩</span>چیدمان دکمه${vipBadge()}</button>
+<button class="tile wide" data-go2="glass"><span class="ic">🔮</span>پیام شیشه‌ای (دکمه‌دار)</button>
+</div>`};
+V.home.bind=()=>document.querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>go(b.dataset.go2));
+
+V.status=()=>{const s=S.st,x=s.status;
+return back()+`<h2>وضعیت ربات</h2><div class="card"><div class="row"><span><span class="dot ${x.running?'on':''}"></span>${x.running?'ربات فعال است':'ربات متوقف است'}</span><span class="mut">آخرین بررسی: ${x.lastPoll?new Date(x.lastPoll).toLocaleTimeString('fa-IR'):'—'}</span></div>
+${x.error?`<div class="mut" style="color:var(--red)">خطا: ${esc(x.error)}</div>`:''}
+<div class="row"><span>چت خصوصی</span><b>${s.stats.private}</b></div><div class="row"><span>گروه</span><b>${s.stats.groups}</b></div><div class="row"><span>کانال</span><b>${s.stats.channels}</b></div></div>
+<div class="card"><h3>رویدادها</h3><div class="log">${(s.log||[]).map(l=>`<div>${new Date(l.t).toLocaleTimeString('fa-IR')} — ${esc(l.text)}</div>`).join('')||'<div>هنوز رویدادی نیست</div>'}</div></div>
+<div class="mut">برای گروه‌ها: ربات را به گروه اضافه کنید و <b>ادمین</b> کنید تا بتواند پیام حذف و کاربر اخراج کند.</div>`};
+
+V.pwelcome=()=>back()+`<h2>خوش‌آمد پیوی</h2><div class="card stack"><div class="mut">وقتی کاربر ربات را استارت می‌کند این متن فرستاده می‌شود. تگ‌ها: {name} {bot}</div>
+<textarea id="pw">${esc(S.st.settings.privateWelcome)}</textarea><button class="btn g" id="sv">ذخیره</button></div>`;
+V.pwelcome.bind=()=>$('#sv').onclick=()=>save({privateWelcome:$('#pw').value});
+
+V.group=()=>{const s=S.st.settings,L=s.locks;
+const feat=(id,t,on,extra='')=>`<div class="row"><span>${t}</span>${sw(id,on)}</div>${extra}`;
+const names={forward:'قفل فوروارد',file:'قفل فایل',sticker:'قفل استیکر',contact:'قفل مخاطب',poll:'قفل نظرسنجی',location:'قفل موقعیت'};
+const groups=S.st.chats.filter(c=>c.type==='group');
+return back()+`<h2>مدیریت گروه</h2>
+<div class="card"><h3>ویژگی‌ها <span class="mut">(برای همه گروه‌هایی که ربات ادمین‌شان است)</span></h3>
+${feat('f_welcome','خوش‌آمدگویی',s.welcome.on,`<textarea id="t_welcome" style="min-height:70px">${esc(s.welcome.text)}</textarea>`)}
+${feat('f_goodbye','خداحافظی',s.goodbye.on,`<textarea id="t_goodbye" style="min-height:70px">${esc(s.goodbye.text)}</textarea>`)}
+<div class="row"><span>قوانین گروه (با دستور /rules)</span></div><textarea id="t_rules" style="min-height:80px">${esc(s.rules.text)}</textarea>
+${feat('f_antispam','ضد اسپم',s.antispam.on,`<div class="flex mut">بیش از <input type="number" id="sp_max" style="width:80px" value="${s.antispam.max}"> پیام در <input type="number" id="sp_sec" style="width:80px" value="${s.antispam.seconds}"> ثانیه</div>`)}
+${feat('f_antilink','ضد لینک',s.antilink.on)}
+${feat('f_antiads','ضد تبلیغات'+(owned('antiads')?'':' (نیازمند خرید)'),owned('antiads')&&s.antiads.on,owned('antiads')?'':'<div class="mut">برای فعال‌سازی، «ضد تبلیغات در گروه و پیوی» را از فروشگاه بخرید.</div>')}
+${feat('f_wf','فیلتر کلمات',s.wordfilter.on,`<input class="field" id="wf_words" placeholder="کلمات را با ویرگول جدا کنید" value="${esc((s.wordfilter.words||[]).join(','))}">`)}
+<div class="row"><span>حداکثر اخطار</span><span class="flex"><input type="number" id="w_max" style="width:80px" value="${s.warn.max}"><select id="w_act" style="width:110px"><option value="kick" ${s.warn.action==='kick'?'selected':''}>اخراج</option><option value="ban" ${s.warn.action==='ban'?'selected':''}>بن</option></select></span></div>
+${feat('f_won','اخطار خودکار برای تخلف',s.warn.onViolation)}
+${feat('f_fun','دستورات سرگرمی و بازی',!s.fun||s.fun.on,'<div class="mut">اعضا با /joke /fal /quote /fact /dice /coin /rps /rand /ball /yesno /truth /dare /card /lotto /luck /date (در گروه و پیوی) جواب می‌گیرند.</div>')}
+<h3 style="margin-top:14px">قفل‌ها</h3>
+${Object.keys(names).map(k=>feat('l_'+k,names[k],L[k])).join('')}
+<h3 style="margin-top:14px">ادمین‌های ربات</h3><div class="mut">شناسه کاربران (مثلاً u0...) را با ویرگول جدا کنید. ادمین‌ها از فیلترها معاف‌اند و می‌توانند /ban /kick /warn /mute /unban را (با ریپلای) بزنند.</div>
+<input class="field" id="admins" value="${esc((s.admins||[]).join(','))}">
+<button class="btn g" id="svg" style="margin-top:14px;width:100%">ذخیره همه</button></div>
+<div class="card"><h3>پیام‌های خودکار</h3><div id="autoList"></div><button class="btn o s" id="addAuto">+ پیام خودکار</button></div>
+<div class="card"><h3>گروه‌ها و اعضا</h3>${groups.length?groups.map(g=>`<details><summary>${esc(g.title||g.id)} <span class="mut">(${g.users.length} عضو دیده‌شده)</span></summary>
+<div class="flex" style="margin:6px 0"><input class="field" style="flex:1" data-gt="${esc(g.id)}" value="${esc(g.title)}" placeholder="نام گروه ({group})"><button class="btn s g" data-gs="${esc(g.id)}">ذخیره نام</button></div>
+${g.users.map(u=>`<div class="u"><span>${esc(u.name)} <span class="mut">${u.warns?'· اخطار '+u.warns:''}${u.muted?' · سکوت':''}</span></span><span class="flex">
+<button class="btn s o" data-a="warn|${esc(g.id)}|${esc(u.id)}">اخطار</button><button class="btn s o" data-a="mute|${esc(g.id)}|${esc(u.id)}">سکوت</button><button class="btn s o" data-a="unmute|${esc(g.id)}|${esc(u.id)}">رفع سکوت</button><button class="btn s o" data-a="kick|${esc(g.id)}|${esc(u.id)}">اخراج</button><button class="btn s r" data-a="ban|${esc(g.id)}|${esc(u.id)}">بن</button><button class="btn s o" data-a="unban|${esc(g.id)}|${esc(u.id)}">رفع بن</button></span></div>`).join('')||'<div class="mut">هنوز عضوی دیده نشده؛ با اولین پیام در گروه ثبت می‌شود.</div>'}</details>`).join(''):'<div class="mut">هنوز گروهی ثبت نشده. ربات را به گروه اضافه و ادمین کنید و یک پیام بفرستید.</div>'}</div>`};
+V.group.bind=()=>{
+  if(!owned('antiads')){const e=$('#f_antiads');if(e)e.disabled=true}
+  const auto=JSON.parse(JSON.stringify(S.st.settings.auto||[]));
+  const drawAuto=()=>{$('#autoList').innerHTML=auto.map((a,i)=>`<div class="card" style="padding:12px"><textarea data-at="${i}" style="min-height:60px">${esc(a.text)}</textarea><div class="flex" style="margin-top:8px"><span class="mut">هر</span><input type="number" data-ae="${i}" style="width:80px" value="${a.everyMin||60}"><span class="mut">دقیقه به</span><select data-ag="${i}" style="width:120px"><option value="groups" ${a.target==='groups'?'selected':''}>گروه‌ها</option><option value="private" ${a.target==='private'?'selected':''}>پیوی‌ها</option><option value="all" ${a.target==='all'?'selected':''}>همه</option></select>${sw('ao'+i,a.on)}<button class="btn s r" data-ad="${i}">حذف</button></div></div>`).join('')||'<div class="mut">موردی نیست</div>';
+    document.querySelectorAll('[data-ad]').forEach(b=>b.onclick=()=>{auto.splice(+b.dataset.ad,1);drawAuto()});};
+  drawAuto();
+  $('#addAuto').onclick=()=>{auto.push({text:'',everyMin:60,target:'groups',on:true});drawAuto()};
+  $('#svg').onclick=()=>{
+    document.querySelectorAll('[data-at]').forEach(e=>auto[+e.dataset.at].text=e.value);
+    document.querySelectorAll('[data-ae]').forEach(e=>auto[+e.dataset.ae].everyMin=+e.value||60);
+    document.querySelectorAll('[data-ag]').forEach(e=>auto[+e.dataset.ag].target=e.value);
+    auto.forEach((a,i)=>a.on=$('#ao'+i).checked);
+    const c=id=>$('#'+id).checked;
+    save({welcome:{on:c('f_welcome'),text:$('#t_welcome').value},goodbye:{on:c('f_goodbye'),text:$('#t_goodbye').value},rules:{text:$('#t_rules').value},
+      antispam:{on:c('f_antispam'),max:+$('#sp_max').value||5,seconds:+$('#sp_sec').value||10},antilink:{on:c('f_antilink')},antiads:{on:c('f_antiads')},
+      wordfilter:{on:c('f_wf'),words:$('#wf_words').value.split(/[,،]/).map(x=>x.trim()).filter(Boolean)},
+      warn:{max:+$('#w_max').value||3,action:$('#w_act').value,onViolation:c('f_won')},fun:{on:c('f_fun')},
+      locks:Object.fromEntries(['forward','file','sticker','contact','poll','location'].map(k=>[k,c('l_'+k)])),
+      admins:$('#admins').value.split(/[,،]/).map(x=>x.trim()).filter(Boolean),auto});
+  };
+  document.querySelectorAll('[data-gs]').forEach(b=>b.onclick=async()=>{const id=b.dataset.gs,v=$(`[data-gt="${id}"]`).value;
+    try{await api('/api/chat','PUT',{chat_id:id,title:v});await refresh();toast('نام گروه ذخیره شد')}catch(e){toast('❌ '+e.message)}});
+  document.querySelectorAll('[data-a]').forEach(b=>b.onclick=async()=>{const [type,chat_id,user_id]=b.dataset.a.split('|');
+    let minutes=10; if(type==='mute'){const m=prompt('چند دقیقه سکوت؟','10'); if(m===null)return; minutes=+m||10}
+    try{await api('/api/action','POST',{type,chat_id,user_id,minutes});toast('انجام شد ✅');await refresh();render(true)}catch(e){toast('❌ '+e.message)}});
+};
+
+const targetSel=()=>{const c=S.st.chats;return `<select id="tg"><option value="all-groups">همه گروه‌ها (${c.filter(x=>x.type==='group').length})</option><option value="all-private">همه پیوی‌ها (${c.filter(x=>x.type==='private').length})</option>${c.filter(x=>x.type==='group').map(g=>`<option value="${esc(g.id)}">گروه: ${esc(g.title||g.id)}</option>`).join('')}</select>`};
+V.send=()=>back()+`<h2>ارسال پیام</h2><div class="card stack"><div class="mut">فقط به چت‌هایی می‌رسد که قبلاً با ربات تعامل داشته‌اند (قانون روبیکا). تگ‌ها مجازند.</div>${targetSel()}<textarea id="msg" placeholder="متن پیام"></textarea><button class="btn g" id="go">ارسال</button><div class="mut" id="res"></div></div>`;
+V.send.bind=()=>$('#go').onclick=async()=>{const b=$('#go');b.disabled=true;
+  try{const r=await api('/api/send','POST',{target:$('#tg').value,text:$('#msg').value});$('#res').textContent=`ارسال شد: ${r.ok} موفق، ${r.fail} ناموفق`}catch(e){$('#res').textContent='❌ '+e.message}b.disabled=false};
+
+V.glass=()=>back()+`<h2>پیام شیشه‌ای</h2><div class="card stack"><div class="mut">پیامی با دکمه‌های شیشه‌ای زیر آن. با زدن هر دکمه، ربات پاسخ تعیین‌شده را می‌فرستد. ردیف‌بندی دکمه‌ها از صفحه «چیدمان دکمه» تنظیم می‌شود.</div>${targetSel()}<textarea id="gm" aria-label="متن پیام" placeholder="متن پیام"></textarea><div id="btns"></div><button class="btn o s" id="addB">+ دکمه</button>
+<div class="bubble"><span id="gpv">پیش‌نمایش</span><div id="gpb"></div></div><div class="flex"><button class="btn o" id="gsv">ذخیره دکمه‌ها</button><button class="btn g" id="gsend">ذخیره و ارسال</button></div><div class="mut" id="res"></div></div>`;
+V.glass.bind=()=>{
+  const bs=bnorm();if(!bs.length)bs.push({text:'',reply:'',row:1});
+  const read=()=>{document.querySelectorAll('[data-bt]').forEach(e=>bs[+e.dataset.bt].text=e.value);document.querySelectorAll('[data-br]').forEach(e=>bs[+e.dataset.br].reply=e.value)};
+  const prev=()=>{$('#gpv').textContent=$('#gm').value||'پیش‌نمایش';$('#gpb').innerHTML=kpHtml(normRows(bs.map(b=>({...b}))))};
+  const draw=()=>{$('#btns').innerHTML=bs.map((b,i)=>`<div class="flex" style="margin-bottom:8px"><input class="field" type="text" style="flex:1;min-width:130px" data-bt="${i}" aria-label="متن دکمه" placeholder="متن دکمه" value="${esc(b.text)}"><input class="field" type="text" style="flex:2;min-width:150px" data-br="${i}" aria-label="پاسخ" placeholder="پاسخ ربات هنگام زدن" value="${esc(b.reply)}"><button class="btn r s" data-bd="${i}" aria-label="حذف دکمه">✕</button></div>`).join('');
+    document.querySelectorAll('[data-bd]').forEach(x=>x.onclick=()=>{read();bs.splice(+x.dataset.bd,1);if(!bs.length)bs.push({text:'',reply:'',row:1});draw();prev()});
+    document.querySelectorAll('[data-bt],[data-br]').forEach(e=>e.oninput=()=>{read();prev()})};
+  const saveBtns=async()=>{read();const clean=bs.filter(b=>b.text).map(b=>{b.id=b.id||('btn_'+Date.now().toString(36)+Math.random().toString(36).slice(2,5));return {id:b.id,text:b.text,reply:b.reply,row:b.row||1}});await save({buttons:clean},'دکمه‌ها ذخیره شد');return clean.length};
+  draw();prev();$('#gm').oninput=prev;
+  $('#addB').onclick=()=>{read();if(bs.length<24){bs.push({text:'',reply:'',row:Math.max(0,...bs.map(b=>b.row||1))+1});draw();prev()}};
+  $('#gsv').onclick=saveBtns;
+  $('#gsend').onclick=async()=>{const b=$('#gsend');b.disabled=true;
+    try{if(!(await saveBtns())){$('#res').textContent='حداقل یک دکمه با متن لازم است';b.disabled=false;return}
+      const r=await api('/api/glass','POST',{target:$('#tg').value,text:$('#gm').value});$('#res').textContent=`ارسال شد: ${r.ok} موفق، ${r.fail} ناموفق`}catch(e){$('#res').textContent='❌ '+e.message}b.disabled=false};
+};
+
+/* ---------- shop ---------- */
+const PRODUCTS={
+ antiads:{t:'ضد تبلیغات در گروه و پیوی',d:'مانع می‌شود تبلیغ‌کننده‌هایی که بنر یا تبلیغ ثبت کرده‌اند به کاربرانی که ربات را در پیوی دارند برسند و در گروه هم هر تبلیغی را حذف می‌کند.',p:'۳۵,۰۰۰ تومان',tag:'<span class="tag">کاربردی</span>',n:'این محصول'},
+ adpm:{t:'تبلیغ در پیوی ربات‌ها',d:'',p:'۵۵,۰۰۰ تومان',tag:'<span class="tag">کاربردی</span>',n:'این محصول'},
+ vip:{t:'خرید برچسب VIP',d:'استفاده به‌طور کامل از آیتم‌های VIP؛ هر خرید ۳۰ روز اعتبار دارد',p:'',tag:'<span class="vip">VIP</span>',n:'برچسب VIP'}};
+const untilOf=k=>k==='vip'?vipUntilTs():subUntil(k);
+const owned=k=>untilOf(k)>Date.now();
+const subStatus=k=>{const u=untilOf(k);if(!u)return '';const d=Math.ceil((u-Date.now())/864e5),dt=new Date(u).toLocaleDateString('fa-IR'),n=PRODUCTS[k].n;return d>0?`<div class="note">${n} فعال است؛ ${d.toLocaleString('fa-IR')} روز دیگر (تا ${dt}) باقی مانده است.</div>`:`<div class="note" style="border-color:var(--red)">مدت ۳۰ روزه ${n} در ${dt} تمام شد. برای استفاده دوباره باید دوباره بخرید.</div>`};
+V.shop=()=>`<button class="btn o s back" onclick="go(S.mode?'home':'login')">→ بازگشت</button>`+`<h2>فروشگاه</h2>`+Object.entries(PRODUCTS).map(([k,x])=>`<div class="card stack"><div class="flex" style="justify-content:space-between"><h3 style="margin:0">${x.t}</h3>${x.tag}</div>${x.d?`<div class="mut">${x.d}</div>`:''}${x.p?`<div class="price">${x.p}</div>`:''}${subStatus(k)}<button class="btn g" data-buy="${k}">درخواست خرید</button><div class="mut">بعد از پرداخت یک کد فعال‌سازی می‌گیرید و اینجا وارد می‌کنید. هر کد ۳۰ روز اعتبار دارد و بعد از آن باید دوباره بخرید.</div><div class="flex"><input class="field" type="text" id="code_${k}" aria-label="کد فعال‌سازی ${x.t}" placeholder="کد فعال‌سازی" style="flex:1;min-width:160px;direction:ltr;text-align:left"><button class="btn o" data-act="${k}">فعال‌سازی</button></div><div class="mut" id="res_${k}"></div></div>`).join('');
+V.shop.bind=()=>{document.querySelectorAll('[data-buy]').forEach(b=>b.onclick=()=>toast('درگاه پرداخت هنوز متصل نیست'));document.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>redeem(b.dataset.act))};
+async function redeem(k){const code=$('#code_'+k).value.trim(),res=$('#res_'+k);if(!code)return;
+  if(S.mode==='token'){try{await api('/api/redeem','POST',{product:k,code});await refresh();toast('فعال شد');render(true)}catch(e){res.textContent=e.message}}
+  else if(S.mode==='demo'){const dc='DEMO-'+k.toUpperCase();if(code===dc){const now=Date.now();if(k==='vip'){S.st.vip=true;S.st.vipUntil=Math.max(now,S.st.vipUntil||0)+30*864e5}else{S.st.subs=S.st.subs||{};S.st.subs[k]=Math.max(now,S.st.subs[k]||0)+30*864e5}toast('فعال شد (نمایشی)');render(true)}else res.textContent='کد نامعتبر است. در حالت نمایشی کد آزمایشی '+dc+' است.'}
+  else res.textContent='اول با توکن وارد پنل شوید'}
+const subUntil=k=>(S.st&&S.st.subs&&S.st.subs[k])||0;
+
+/* ---------- banner ads (unlocked by "تبلیغ در پیوی ربات‌ها") ---------- */
+const lockProduct=(n,k)=>`<button class="btn o s back" onclick="go(S.mode?'home':'login')">→ بازگشت</button>`+`<h2>${n}</h2><div class="card stack"><span class="tag">${PRODUCTS[k].t}</span><div class="mut">برای استفاده از این بخش اول باید «${PRODUCTS[k].t}» را بخرید.</div><button class="btn g" id="toShop">رفتن به فروشگاه</button></div>`;
+const AD_ST={pending:['در انتظار تأیید',''],approved:['در حال ارسال','ok'],done:['ارسال شد','ok'],rejected:['رد شد','bad']};
+V.banner=()=>owned('adpm')?`<button class="btn o s back" onclick="go(S.mode?'home':'login')">→ بازگشت</button>`+`<h2>بنر تبلیغاتی</h2><div class="card stack"><div class="note">بنر شما بعد از تأیید برای کاربرانی که در پیوی ربات‌های ساخته‌شده با این پنل هستند ارسال می‌شود. ربات خودتان و ربات‌هایی که «ضد تبلیغات» دارند مستثنی‌اند و هر کاربر در ۲۴ ساعت فقط یک تبلیغ می‌بیند. زیر هر بنر عبارت «تبلیغ» و راه قطع تبلیغات اضافه می‌شود.</div>
+<textarea id="bn" maxlength="500" aria-label="متن بنر" placeholder="متن بنر خود را بنویسید (۵ تا ۵۰۰ نویسه)"></textarea><div class="mut" id="bncnt">۰ / ۵۰۰</div>
+<div class="bubble"><span id="bnpv">پیش‌نمایش</span><div class="mut" style="margin-top:8px">— تبلیغ | برای قطع تبلیغات: /stopads</div></div>
+<button class="btn g" id="bnsend">ارسال بنر</button><div class="mut" id="bnres"></div></div>
+<div class="card"><h3>بنرهای شما</h3><div id="bnlist" class="mut">در حال بارگذاری...</div><button class="btn o s" id="bnref" style="margin-top:10px">تازه‌سازی</button></div>`:lockProduct('بنر تبلیغاتی','adpm');
+V.banner.bind=()=>{
+  if(!owned('adpm')){$('#toShop').onclick=()=>go('shop');return}
+  const ta=$('#bn'),upd=()=>{$('#bnpv').textContent=ta.value||'پیش‌نمایش';$('#bncnt').textContent=ta.value.length.toLocaleString('fa-IR')+' / ۵۰۰'};
+  ta.oninput=upd;upd();
+  const load=async()=>{try{const l=await adList();$('#bnlist').innerHTML=l.length?l.map(b=>{const st=AD_ST[b.status]||[b.status,''];return `<div class="row" style="display:block"><div><b class="${st[1]}">${st[0]}</b> · ${new Date(b.createdAt).toLocaleDateString('fa-IR')}</div><div style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(b.text)}</div>${b.status==='done'?`<div class="mut">ارسال‌شده ${b.stats.sent.toLocaleString('fa-IR')} · ردشده به‌دلیل محدودیت ${b.stats.skipped.toLocaleString('fa-IR')} · ناموفق ${b.stats.fail.toLocaleString('fa-IR')}</div>`:''}</div>`}).join(''):'هنوز بنری نفرستاده‌اید.'}catch(e){$('#bnlist').textContent=e.message}};
+  load();$('#bnref').onclick=load;
+  $('#bnsend').onclick=async()=>{const b=$('#bnsend'),r=$('#bnres');b.disabled=true;r.textContent='';
+    try{const t=ta.value.trim();if(t.length<5)throw new Error('متن بنر باید حداقل ۵ نویسه باشد');await adSubmit(t);ta.value='';upd();r.textContent='بنر ثبت شد و در انتظار تأیید است';await load()}catch(e){r.textContent=e.message}b.disabled=false};
+};
+function menuSync(){const b=$('#miBanner');if(b)b.hidden=!(!!S.mode&&owned('adpm'))}
+async function adSubmit(t){if(S.mode==='token')return (await api('/api/banner','POST',{text:t})).banner;
+  S.ads=S.ads||[];if(S.ads.some(b=>b.status==='pending'))throw new Error('یک بنر قبلی شما هنوز در صف است');
+  const b={id:String(Date.now()),text:t,status:'pending',createdAt:Date.now(),stats:{sent:0,fail:0,skipped:0}};S.ads.unshift(b);return b}
+async function adList(){if(S.mode==='token')return (await api('/api/banners')).banners;return S.ads||[]}
+
+V.help=()=>`<button class="btn o s back" onclick="go(S.mode?'home':'login')">→ بازگشت</button><h2>راهنمای راه‌اندازی</h2><div class="card mut">
+۱) در روبیکا به «بات فادر» پیام بدهید و یک ربات بسازید؛ توکن را بگیرید.<br>۲) توکن را اینجا وارد کنید.<br>۳) ربات را به گروه اضافه و <b>ادمین</b> کنید (برای حذف پیام و اخراج).<br>۴) در پنل، قسمت مدیریت گروه، ویژگی‌ها را روشن و ذخیره کنید.<br>۵) برای ارسال پیام به پیوی‌ها، ابتدا کاربران باید ربات را استارت کنند.</div>`;
+
+const TD={"{name}": "نام کامل کاربر (برای خوش‌آمد، خداحافظی و پاسخ‌ها)", "{firstname}": "فقط نام کوچک کاربر", "{username}": "نام کاربری کاربر با @ (اگر نداشته باشد خالی می‌ماند)", "{bot}": "نام ربات شما", "{botusername}": "نام کاربری ربات شما با @", "{group}": "نام گروهی که پیام در آن فرستاده می‌شود (از صفحه گروه‌ها قابل ویرایش است)", "{id}": "شناسه کاربر در روبیکا", "{warns}": "تعداد اخطارهای فعلی کاربر در همین گروه", "{warnmax}": "حداکثر اخطار قبل از اخراج یا بن (از تنظیمات گروه)", "{rules}": "متن قوانین گروه که در تنظیمات نوشته‌اید", "{seen}": "تعداد اعضای دیده‌شده‌ی این گروه توسط ربات", "{chats}": "تعداد همه چت‌هایی که ربات دیده (پیوی، گروه، کانال)", "{groups}": "تعداد گروه‌های ربات", "{privates}": "تعداد کاربرانی که ربات را در پیوی دارند", "{date}": "تاریخ امروز شمسی؛ مثلاً ۱۴۰۵/۰۷/۲۵", "{weekday}": "نام روز هفته؛ مثلاً شنبه", "{day}": "روز ماه شمسی", "{month}": "نام ماه شمسی؛ مثلاً مهر", "{year}": "سال شمسی", "{time}": "ساعت فعلی به وقت ایران", "{greeting}": "سلام بر اساس ساعت: صبح بخیر، ظهر بخیر، عصر بخیر یا شب بخیر", "{joke}": "یک جوک تصادفی", "{fal}": "یک فال تصادفی", "{quote}": "یک جمله انگیزشی تصادفی", "{fact}": "یک نکته علمی یا جالب تصادفی", "{emoji}": "یک ایموجی تصادفی", "{color}": "نام یک رنگ تصادفی", "{luck}": "درصد شانس امروز؛ عددی تصادفی بین ۰ تا ۱۰۰٪", "{rand}": "یک عدد تصادفی بین ۱ تا ۱۰۰", "{dice}": "پرتاب تاس؛ عددی بین ۱ تا ۶", "{dice2}": "پرتاب دو تاس با هم", "{coin}": "پرتاب سکه؛ شیر یا خط", "{rps}": "انتخاب تصادفی سنگ، کاغذ یا قیچی", "{ball}": "جواب توپ جادویی؛ مثلاً «قطعاً بله» یا «شاید»", "{yesno}": "جواب تصادفی بله یا خیر", "{truth}": "یک سؤال برای بازی «جرئت یا حقیقت» (حقیقت)", "{dare}": "یک چالش برای بازی «جرئت یا حقیقت» (جرئت)", "{card}": "یک ورق تصادفی از دسته ورق؛ مثلاً K♠", "{lotto}": "۶ عدد تصادفی بین ۱ تا ۴۹ مرتب‌شده، مثل قرعه‌کشی"};
+const tagGroups=[["سخنگو", ["{name}", "{firstname}", "{username}", "{bot}", "{botusername}", "{group}", "{greeting}"]], ["آمار کاربر", ["{name}", "{firstname}", "{username}", "{id}", "{warns}"]], ["آمار گروه", ["{group}", "{bot}", "{seen}", "{rules}", "{warnmax}"]], ["آمار ربات", ["{chats}", "{groups}", "{privates}", "{botusername}"]], ["زمان و تاریخ", ["{date}", "{weekday}", "{day}", "{month}", "{year}", "{time}", "{greeting}"]], ["سرگرمی", ["{joke}", "{fal}", "{quote}", "{fact}", "{emoji}", "{color}", "{luck}", "{rand}", "{time}"]], ["بازی", ["{dice}", "{dice2}", "{coin}", "{rps}", "{ball}", "{yesno}", "{truth}", "{dare}", "{card}", "{lotto}", "{rand}"]]];
+V.tags=()=>`<button class="btn o s back" onclick="go(S.mode?'home':'login')">→ بازگشت</button>`+`<h2>تگ‌ها</h2><input class="field" type="text" id="tagq" aria-label="جستجوی تگ" placeholder="جستجوی تگ" style="margin-bottom:12px">`+tagGroups.map(([t,l])=>`<div class="card tgc"><h3>${t}</h3>${l.map(x=>`<div class="tg"><span class="chip" role="button" tabindex="0" data-c="${x}">${x}</span><div class="mut">${TD[x]}</div></div>`).join('')}</div>`).join('')+`<div class="mut">روی تگ بزنید تا کپی شود. تگ‌ها در متن خوش‌آمد، خداحافظی، پیام‌های خودکار و پیام‌های ارسالی جایگزین می‌شوند.</div>`;
+V.tags.bind=()=>{
+  document.querySelectorAll('[data-c]').forEach(c=>{const f=()=>{try{navigator.clipboard.writeText(c.dataset.c).then(()=>toast('کپی شد '+c.dataset.c),()=>toast('کپی مجاز نبود؛ تگ را انتخاب و کپی کنید'))}catch(e){toast('کپی مجاز نبود؛ تگ را انتخاب و کپی کنید')}};c.onclick=f;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}});
+  $('#tagq').oninput=()=>{const q=$('#tagq').value.trim().toLowerCase();document.querySelectorAll('.tgc').forEach(card=>{let any=false;card.querySelectorAll('.tg').forEach(t=>{const hit=!q||t.textContent.toLowerCase().includes(q);t.hidden=!hit;if(hit)any=true});card.hidden=!any})};
+};
+const BTN=()=>S.st.settings.buttons||[];
+const getFJ=()=>S.st.settings.forcejoin||{on:false,group:true,private:true,channels:[],text:'برای استفاده از ربات، اول در کانال زیر عضو شو و بعد دوباره پیام بده:'};
+const FJWARN=()=>S.mode==='token'&&S.st.status&&S.st.status.fjUnsupported?('آخرین بررسی عضویت انجام نشد: '+S.st.status.fjUnsupported+'. تا وقتی این پیام هست هیچ کاربری مسدود نمی‌شود.'):'';
+
+/* ---------- button layout helpers ---------- */
+const normRows=bs=>{const rs=[...new Set(bs.map(b=>b.row||1))].sort((a,b)=>a-b);bs.forEach(b=>{b.row=rs.indexOf(b.row||1)+1});return bs};
+const bnorm=()=>normRows(JSON.parse(JSON.stringify(BTN())));
+const kpRows=bs=>{const m={};bs.filter(b=>b.text).forEach(b=>(m[b.row||1]=m[b.row||1]||[]).push(b));return Object.keys(m).map(Number).sort((a,b)=>a-b).flatMap(k=>{const r=[];for(let i=0;i<m[k].length;i+=3)r.push(m[k].slice(i,i+3));return r})};
+const kpHtml=bs=>{const rows=kpRows(bs);return rows.length?rows.map(r=>`<div class="kprow">${r.map(b=>`<span class="gb">${esc(b.text)}</span>`).join('')}</div>`).join(''):'<div class="mut">هنوز دکمه‌ای ذخیره نشده</div>'};
+
+V.layout=()=>back()+`<h2>چیدمان دکمه</h2><div class="card stack"><div class="mut">دکمه‌های «پیام شیشه‌ای» را اینجا مرتب کنید. هر ردیف حداکثر ۳ دکمه دارد. فلش‌های ← و → جای دکمه را در همان ردیف عوض می‌کنند و ↑ و ↓ آن را به ردیف دیگر می‌برند.</div>
+<div class="flex"><span class="mut">چیدمان سریع:</span><button class="btn o s" data-p="1">۱ در هر ردیف</button><button class="btn o s" data-p="2">۲ در هر ردیف</button><button class="btn o s" data-p="3">۳ در هر ردیف</button></div>
+<div id="lay"></div><h3>پیش‌نمایش</h3><div class="bubble" id="lpv"></div><button class="btn g" id="lsv">ذخیره چیدمان</button></div>`;
+V.layout.bind=()=>{
+  let L=bnorm();
+  const draw=()=>{
+    if(!L.length){$('#lay').innerHTML='<div class="note">هنوز دکمه‌ای ندارید. اول در صفحه «پیام شیشه‌ای» دکمه بسازید و ذخیره کنید.</div>';$('#lpv').innerHTML='';return}
+    const rows={};L.forEach((b,i)=>(rows[b.row]=rows[b.row]||[]).push([b,i]));
+    $('#lay').innerHTML=Object.keys(rows).map(Number).sort((a,b)=>a-b).map(r=>`<div class="lrow"><div class="mut">ردیف ${r.toLocaleString('fa-IR')}</div><div class="flex">${rows[r].map(([b,i])=>`<div class="lb"><b>${esc(b.text)}</b><div class="flex"><button class="btn o s" data-m="h|${i}|-1" aria-label="یک خانه جلوتر">→</button><button class="btn o s" data-m="h|${i}|1" aria-label="یک خانه عقب‌تر">←</button><button class="btn o s" data-m="v|${i}|-1" aria-label="ردیف بالا">↑</button><button class="btn o s" data-m="v|${i}|1" aria-label="ردیف پایین">↓</button></div></div>`).join('')}</div></div>`).join('');
+    $('#lpv').innerHTML=kpHtml(L);
+    document.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{const [t,i,d]=x.dataset.m.split('|');move(t,+i,+d)});
+  };
+  const move=(t,i,d)=>{
+    const b=L[i];
+    if(t==='h'){let j=i+d;while(j>=0&&j<L.length&&L[j].row!==b.row)j+=d;if(j<0||j>=L.length)return;[L[i],L[j]]=[L[j],L[i]]}
+    else{const nr=b.row+d;if(nr<1)return;if(L.filter(x=>x.row===nr).length>=3){toast('این ردیف پر است (حداکثر ۳ دکمه)');return}b.row=nr;normRows(L)}
+    draw();
+  };
+  document.querySelectorAll('[data-p]').forEach(x=>x.onclick=()=>{const n=+x.dataset.p;L.sort((a,b)=>a.row-b.row);L.forEach((b,i)=>{b.row=Math.floor(i/n)+1});draw()});
+  $('#lsv').onclick=()=>save({buttons:L},'چیدمان ذخیره شد');
+  draw();
+};
+
+V.forcejoin=()=>{const f=getFJ(),w=FJWARN();
+return back()+`<h2>عضویت ضروری</h2><div class="card stack">
+<div class="mut">تا وقتی کاربر در کانال‌های زیر عضو نشده، پیامش در گروه حذف می‌شود و در پیوی ربات فقط لینک عضویت می‌فرستد. ربات باید در همان کانال‌ها ادمین باشد.</div>
+${w?`<div class="note" style="border-color:var(--red)">${esc(w)}</div>`:''}
+<div class="note">در مستندات روبیکا روش مشخصی برای بررسی عضویت کاربر پیدا نشد. ربات تلاش می‌کند عضویت را از خود روبیکا بپرسد و اگر پاسخی نگرفت، هیچ کاربری را مسدود نمی‌کند. بعد از روشن‌کردن، با یک حساب غیرعضو امتحان کنید.</div>
+<div class="row"><span>فعال</span>${sw('fj_on',f.on)}</div>
+<div class="row"><span>اعمال در گروه‌ها</span>${sw('fj_g',f.group)}</div>
+<div class="row"><span>اعمال در پیوی</span>${sw('fj_p',f.private)}</div>
+<h3>کانال‌ها (حداکثر ۵)</h3><div id="fjl"></div><button class="btn o s" id="fjadd">+ کانال</button>
+<h3>متن اعلان</h3><textarea id="fj_t" aria-label="متن اعلان">${esc(f.text)}</textarea>
+<button class="btn g" id="fjs">ذخیره</button></div>`};
+V.forcejoin.bind=()=>{
+  const ch=JSON.parse(JSON.stringify(getFJ().channels||[]));
+  const read=()=>{document.querySelectorAll('[data-fi]').forEach(e=>ch[+e.dataset.fi].id=e.value.trim());document.querySelectorAll('[data-ft]').forEach(e=>ch[+e.dataset.ft].title=e.value);document.querySelectorAll('[data-fl]').forEach(e=>ch[+e.dataset.fl].link=e.value.trim())};
+  const draw=()=>{$('#fjl').innerHTML=ch.map((c,i)=>`<div class="card stack" style="padding:12px"><input class="field" type="text" data-fi="${i}" aria-label="شناسه کانال" placeholder="شناسه کانال (با c0 شروع می‌شود)" value="${esc(c.id)}" style="direction:ltr;text-align:left"><input class="field" type="text" data-ft="${i}" aria-label="نام کانال" placeholder="نام کانال برای نمایش" value="${esc(c.title)}"><input class="field" type="text" data-fl="${i}" aria-label="لینک کانال" placeholder="لینک کانال (https://rubika.ir/...)" value="${esc(c.link)}" style="direction:ltr;text-align:left"><button class="btn r s" data-fd="${i}">حذف کانال</button></div>`).join('')||'<div class="mut">هنوز کانالی اضافه نشده</div>';
+    document.querySelectorAll('[data-fd]').forEach(b=>b.onclick=()=>{read();ch.splice(+b.dataset.fd,1);draw()})};
+  draw();
+  $('#fjadd').onclick=()=>{read();if(ch.length<5){ch.push({id:'',title:'',link:''});draw()}};
+  $('#fjs').onclick=()=>{read();save({forcejoin:{on:$('#fj_on').checked,group:$('#fj_g').checked,private:$('#fj_p').checked,text:$('#fj_t').value,channels:ch.filter(c=>c.id)}},'ذخیره شد')};
+};
+
+const isVip=()=>!!S.st.vip;
+const vipUntilTs=()=>S.st.vipUntil||0;
+const vipStatus=()=>{const u=vipUntilTs();if(!u)return '';const d=Math.ceil((u-Date.now())/864e5),dt=new Date(u).toLocaleDateString('fa-IR');return d>0?`<div class="note">برچسب VIP فعال است؛ ${d.toLocaleString('fa-IR')} روز دیگر (تا ${dt}) باقی مانده است.</div>`:`<div class="note" style="border-color:var(--red)">مدت ۳۰ روزه برچسب VIP شما در ${dt} تمام شد. برای استفاده دوباره باید دوباره بخرید.</div>`};
+
+
+/* ---------- VIP gate ---------- */
+const lockView=n=>back()+`<h2>${n}</h2><div class="card stack"><span class="vip">VIP</span><div class="mut">${vipUntilTs()?'مدت ۳۰ روزه برچسب VIP شما تمام شده است. برای استفاده دوباره باید دوباره بخرید.':'این بخش مخصوص کاربران VIP است. برای استفاده از آیتم‌های VIP اول باید برچسب VIP را بخرید.'}</div><button class="btn g" id="toShop">رفتن به فروشگاه</button></div>`;
+const lockBind=()=>{$('#toShop').onclick=()=>go('shop')};
+[['forcejoin','عضویت ضروری'],['layout','چیدمان دکمه']].forEach(([k,t])=>{const v=V[k],b=V[k].bind;V[k]=()=>isVip()?v():lockView(t);V[k].bind=()=>isVip()?b():lockBind()});
+const vipBadge=()=>`<span class="vip">VIP${isVip()?'':' · قفل'}</span>`;
+
+function render(keepScroll){
+  menuSync();
+  const p=V[S.page]||V.login; const y=window.scrollY;
+  if(!S.st && !['login','shop','help','tags'].includes(S.page)) S.page='login';
+  $('#view').innerHTML=(V[S.page]||V.login)();
+  (V[S.page]||V.login).bind&&(V[S.page]||V.login).bind();
+  if(keepScroll) window.scrollTo(0,y);
+}
+render();
+</script>
+</body>
+</html>
