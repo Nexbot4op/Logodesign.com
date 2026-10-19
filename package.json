@@ -1,0 +1,9 @@
+{
+  "name": "nexdesign-gaming-creator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NEXDESIGN gaming banner and profile creator",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

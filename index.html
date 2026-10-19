@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b16">
+<title>NEXDESIGN | ساخت بنر و پروفایل گیمینگ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap');
+:root{--bg:#080b16;--panel:#111729;--panel2:#171f35;--line:#29324b;--text:#f3f6ff;--muted:#9ba8c7;--green:#7cff6b;--purple:#9d72ff;--cyan:#53e5ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0%,#22204b 0,transparent 36%),radial-gradient(ellipse at 0% 35%,#12302d 0,transparent 28%),var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0}.wrap{max-width:1200px;margin:auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0 26px}.brand{display:flex;align-items:center;gap:12px;font-weight:900;font-size:23px;letter-spacing:.5px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--green),var(--cyan));display:grid;place-items:center;color:#09101b;font-weight:900;font-size:24px;box-shadow:0 0 28px #53e5ff30}.brand small{display:block;font-size:11px;color:var(--muted);font-weight:500;letter-spacing:2px}.badge{border:1px solid #36405b;border-radius:999px;padding:8px 13px;color:#cbd5ef;font-size:12px}
+.hero{text-align:center;padding:26px 10px 34px}.eyebrow{display:inline-block;color:var(--green);border:1px solid #7cff6b50;background:#7cff6b0e;border-radius:999px;padding:6px 13px;font-size:12px}.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.3;margin:15px 0 10px;font-weight:900}.gradient{background:linear-gradient(90deg,var(--green),var(--cyan),var(--purple));-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:650px;margin:auto;line-height:2}
+.layout{display:grid;grid-template-columns:360px 1fr;gap:20px;align-items:start}.panel{background:linear-gradient(160deg,#151c30f5,#0e1425f5);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 18px 55px #0002}.panel h2{font-size:17px;margin:0 0 17px;display:flex;align-items:center;gap:9px}.step{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#7cff6b1b;color:var(--green);font-size:13px}
+.field{margin:0 0 15px}.field label{display:block;font-size:12px;color:#c7d0e7;margin-bottom:7px}.field input[type=text],.field select{width:100%;background:#090f1e;border:1px solid #303b57;border-radius:11px;padding:11px 12px;color:#fff;outline:none}.field input:focus,.field select:focus{border-color:var(--green)}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.colors{display:flex;gap:9px;flex-wrap:wrap}.colorpick{width:35px;height:35px;border-radius:11px;border:2px solid #ffffff28;outline:2px solid transparent;outline-offset:2px}.colorpick.active{outline-color:white}.colorpick[data-color="#7cff6b"]{background:#7cff6b}.colorpick[data-color="#9d72ff"]{background:#9d72ff}.colorpick[data-color="#53e5ff"]{background:#53e5ff}.colorpick[data-color="#ff426d"]{background:#ff426d}.colorpick[data-color="#ffb547"]{background:#ffb547}.colorpick[data-color="#f2f4ff"]{background:#f2f4ff}
+.toggleline{display:flex;align-items:center;justify-content:space-between;color:#c7d0e7;font-size:12px;margin:14px 0}.toggleline input{accent-color:var(--green);width:17px;height:17px}
+.primary,.secondary{border-radius:12px;padding:12px 14px;font-weight:800;transition:.2s}.primary{background:linear-gradient(100deg,var(--green),var(--cyan));color:#07101a;box-shadow:0 8px 24px #53e5ff20}.primary:hover{transform:translateY(-2px);filter:brightness(1.05)}.secondary{background:#202a43;border:1px solid #394665;color:#edf3ff}.actions{display:flex;gap:10px;margin-top:18px}.actions button{flex:1}.full{width:100%}
+.previewpanel{padding:18px}.previewtop{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.previewtop h2{margin:0}.live{font-size:11px;color:var(--green);display:flex;align-items:center;gap:6px}.live:before{content:"";width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green)}
+.canvaswrap{background:repeating-linear-gradient(45deg,#ffffff03 0 10px,transparent 10px 20px),#080c17;border:1px solid #27314a;border-radius:17px;padding:14px;display:grid;place-items:center;min-height:350px;overflow:hidden}.art{position:relative;overflow:hidden;isolation:isolate;width:100%;aspect-ratio:16/9;max-height:490px;border-radius:12px;background:#0c1224;box-shadow:0 15px 40px #0006}.art::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 38%,color-mix(in srgb,var(--accent) 18%,transparent) 38% 48%,transparent 48%),radial-gradient(circle at 75% 45%,color-mix(in srgb,var(--accent) 40%,transparent),transparent 38%),linear-gradient(135deg,#10172b,#080a12);z-index:-3}.art::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 27px,#ffffff08 28px 29px),linear-gradient(90deg,#060914dd,transparent 75%);z-index:-1}.orb{position:absolute;width:34%;aspect-ratio:1;border-radius:50%;right:13%;top:16%;background:radial-gradient(circle at 35% 30%,#fff8,color-mix(in srgb,var(--accent) 65%,#111 35%) 18%,#090d1b 70%);border:2px solid color-mix(in srgb,var(--accent) 75%,white 25%);box-shadow:0 0 30px color-mix(in srgb,var(--accent) 55%,transparent),inset 0 0 35px #000;opacity:.95}.orb:before,.orb:after{content:"";position:absolute;inset:-12%;border:2px solid color-mix(in srgb,var(--accent) 75%,transparent);border-radius:50%;transform:rotate(-35deg) scaleY(.3)}.orb:after{transform:rotate(35deg) scaleY(.3)}.slash{position:absolute;width:20%;height:130%;right:45%;top:-15%;transform:rotate(25deg);background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--accent) 40%,transparent),transparent);filter:blur(8px)}.arttext{position:absolute;z-index:2;left:7%;top:24%;width:57%;text-align:left;direction:ltr;text-shadow:0 3px 12px #000}.arttitle{font-weight:900;font-size:clamp(20px,4.5vw,52px);line-height:1.05;overflow-wrap:anywhere;letter-spacing:1px}.artsub{font-size:clamp(8px,1.4vw,14px);color:#d6def6;letter-spacing:3px;margin-top:12px}.arttag{display:inline-block;margin-top:18px;border:1px solid var(--accent);color:var(--accent);padding:5px 11px;border-radius:4px;font-size:clamp(8px,1.2vw,12px);letter-spacing:2px}.corner{position:absolute;left:3%;bottom:5%;font-size:clamp(7px,1vw,11px);color:#b8c3e4;letter-spacing:2px}.gridline{position:absolute;right:-5%;bottom:-50%;width:70%;height:90%;border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);transform:rotate(-25deg);box-shadow:0 0 0 16px #ffffff03,0 0 0 32px #ffffff03,0 0 0 48px #ffffff03}
+.templates{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}.template{background:#0a1020;border:1px solid #2b3550;border-radius:12px;padding:8px;color:#c8d2eb;font-size:11px;text-align:center}.template:hover,.template.active{border-color:var(--green);color:var(--green)}.mini{height:43px;border-radius:7px;margin-bottom:7px;background:linear-gradient(120deg,#101a2d 35%,#7cff6b55 35% 42%,#121a30 42%);position:relative;overflow:hidden}.mini:after{content:"";position:absolute;right:18%;top:7px;width:27px;height:27px;border-radius:50%;background:radial-gradient(circle,var(--mini),#0b1020 70%);border:1px solid var(--mini);box-shadow:0 0 12px var(--mini)}
+.note{color:#7f8dab;font-size:11px;line-height:1.8;margin-top:12px}.footer{text-align:center;color:#7785a6;font-size:12px;padding:26px 0 12px}.footer b{color:var(--green)}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.controls{order:2}.previewpanel{order:1}.hero{padding-top:8px}.canvaswrap{min-height:200px}.wrap{padding:14px}.panel{padding:16px}}
+@media(max-width:420px){.brand{font-size:19px}.badge{font-size:10px}.two{gap:8px}.templates{gap:7px}.template{padding:6px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand"><div class="logo">N</div><div>Logo design<small>GAMING CREATOR STUDIO</small></div></div><div class="badge">✦ نسخه آزمایشی 1.0</div></header>
+<section class="hero"><span class="eyebrow">✦ استودیوی طراحی آنلاین</span><h1>طرح گیمینگ خودتو<br><span class="gradient">بساز و دانلود کن!</span></h1><p>اسم خودت رو وارد کن، رنگ موردعلاقه‌ات رو انتخاب کن و در چند ثانیه یک بنر گیمینگ اختصاصی بساز. بدون نصب برنامه! 🎮</p></section>
+<main class="layout">
+<section class="panel controls">
+<h2><span class="step">01</span> شخصی‌سازی طرح</h2>
+<div class="field"><label for="name">اسم دلخواه یا نام گیمینگ (این فقط یک نمونه است و قابل تغییره)</label><input id="name" type="text" maxlength="24" value="YOUR GAMING NAME" placeholder="مثلاً NEXBOT"></div>
+<div class="field"><label for="subtitle">متن زیر عنوان</label><input id="subtitle" type="text" maxlength="40" value="GAMING • CREATOR • LEGEND" placeholder="متن دلخواهت"></div>
+<div class="two"><div class="field"><label for="style">نوع طرح</label><select id="style"><option value="banner">بنر گیمینگ</option><option value="profile">پروفایل مربعی</option><option value="cover">کاور کانال</option></select></div><div class="field"><label for="font">استایل نوشته</label><select id="font"><option value="bold">بولد و قدرتمند</option><option value="wide">فاصله‌دار</option><option value="soft">نرم و مدرن</option></select></div></div>
+<div class="field"><label>رنگ اصلی طرح</label><div class="colors"><button class="colorpick active" data-color="#7cff6b" aria-label="سبز"></button><button class="colorpick" data-color="#9d72ff" aria-label="بنفش"></button><button class="colorpick" data-color="#53e5ff" aria-label="آبی"></button><button class="colorpick" data-color="#ff426d" aria-label="قرمز"></button><button class="colorpick" data-color="#ffb547" aria-label="نارنجی"></button><button class="colorpick" data-color="#f2f4ff" aria-label="سفید"></button></div></div>
+<div class="field"><label for="tag">متن برچسب</label><input id="tag" type="text" maxlength="20" value="OFFICIAL CHANNEL"></div>
+<label class="toggleline"><span>نمایش خطوط و افکت نئونی</span><input id="effects" type="checkbox" checked></label>
+<div class="actions"><button class="primary" id="download">⬇ دانلود تصویر PNG</button><button class="secondary" id="reset">بازنشانی</button></div>
+<p class="note">پیش‌نمایش با هر تغییر به‌روز می‌شود. خروجی PNG از طرح ساخته می‌شود و می‌توانی آن را در گوشی ذخیره کنی.</p>
+</section>
+<section class="panel previewpanel">
+<div class="previewtop"><h2><span class="step">02</span> پیش‌نمایش زنده</h2><span class="live">LIVE PREVIEW</span></div>
+<div class="canvaswrap"><div class="art" id="art" style="--accent:#7cff6b"><div class="slash"></div><div class="orb"></div><div class="gridline"></div><div class="arttext"><div class="arttitle" id="arttitle">YOUR<br>GAMING NAME</div><div class="artsub" id="artsub">GAMING • CREATOR • LEGEND</div><div class="arttag" id="arttag">OFFICIAL CHANNEL</div></div><div class="corner">NEXDESIGN / ORIGINAL CREATION</div></div></div>
+<div class="templates"><button class="template active" data-template="neon"><div class="mini" style="--mini:#7cff6b"></div>نئون سایبر</button><button class="template" data-template="purple"><div class="mini" style="--mini:#9d72ff;background:linear-gradient(120deg,#17102d 35%,#9d72ff55 35% 42%,#121a30 42%)"></div>بنفش فضایی</button><button class="template" data-template="red"><div class="mini" style="--mini:#ff426d;background:linear-gradient(120deg,#24101a 35%,#ff426d55 35% 42%,#121a30 42%)"></div>قرمز آتشی</button></div>
+</section>
+</main>
+<div class="footer">ساخته شده با <b>✦ Logo design</b> — مخصوص گیمرها و خلاق‌ها 🎮</div>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let accent='#7cff6b', currentTemplate='neon';
+function update(){
+ const raw=$('#name').value.trim()||'YOUR NAME';
+ const words=raw.split(/\s+/);
+ $('#arttitle').innerHTML=words.map(esc).join('<br>');
+ $('#artsub').textContent=$('#subtitle').value.toUpperCase();
+ $('#arttag').textContent=$('#tag').value.toUpperCase();
+ $('#art').style.setProperty('--accent',accent);
+ const type=$('#style').value;
+ $('#art').style.aspectRatio=type==='profile'?'1/1':type==='cover'?'3/1':'16/9';
+ $('#art').style.maxHeight=type==='profile'?'440px':type==='cover'?'320px':'490px';
+ $('#art').style.width=type==='profile'?'min(100%,440px)':'100%';
+ $('#artsub').style.letterSpacing=$('#font').value==='wide'?'4px':$('#font').value==='soft'?'0px':'2px';
+ $('#arttitle').style.fontWeight=$('#font').value==='soft'?'700':'900';
+ $('#arttitle').style.letterSpacing=$('#font').value==='wide'?'3px':'1px';
+ $('#art').classList.toggle('noeffects',!$('#effects').checked);
+ $('.orb').style.opacity=$('#effects').checked?'0.95':'0.45';
+ $('.slash').style.opacity=$('#effects').checked?'1':'0';
+ $('.gridline').style.opacity=$('#effects').checked?'1':'0';
+}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+['name','subtitle','tag','style','font','effects'].forEach(id=>$('#'+id).addEventListener('input',update));
+$$('.colorpick').forEach(b=>b.addEventListener('click',()=>{$$('.colorpick').forEach(x=>x.classList.remove('active'));b.classList.add('active');accent=b.dataset.color;update();}));
+$$('.template').forEach(b=>b.addEventListener('click',()=>{currentTemplate=b.dataset.template;$$('.template').forEach(x=>x.classList.remove('active'));b.classList.add('active');accent={neon:'#7cff6b',purple:'#9d72ff',red:'#ff426d'}[currentTemplate];$$('.colorpick').forEach(x=>x.classList.toggle('active',x.dataset.color===accent));update();}));
+$('#reset').addEventListener('click',()=>{$('#name').value='YOUR GAMING NAME';$('#subtitle').value='GAMING • CREATOR • LEGEND';$('#tag').value='OFFICIAL CHANNEL';$('#style').value='banner';$('#font').value='bold';$('#effects').checked=true;accent='#7cff6b';$$('.colorpick').forEach(x=>x.classList.toggle('active',x.dataset.color===accent));update();});
+function rounded(ctx,x,y,w,h,r){ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill();}
+$('#download').addEventListener('click',()=>{
+ const btn=$('#download');btn.disabled=true;btn.textContent='در حال ساخت تصویر...';
+ try{
+ const type=$('#style').value, W=type==='profile'?1000:type==='cover'?1500:1600, H=type==='profile'?1000:type==='cover'?500:900;
+ const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');
+ const grad=x.createLinearGradient(0,0,W,H);grad.addColorStop(0,'#111a31');grad.addColorStop(.55,'#0b1020');grad.addColorStop(1,'#050711');x.fillStyle=grad;x.fillRect(0,0,W,H);
+ x.save();x.translate(W*.72,H*.46);let rg=x.createRadialGradient(0,0,10,0,0,W*.35);rg.addColorStop(0,accent+'99');rg.addColorStop(.45,accent+'25');rg.addColorStop(1,'#00000000');x.fillStyle=rg;x.fillRect(-W*.6,-H*.7,W*1.2,H*1.4);x.restore();
+ x.strokeStyle='#ffffff0b';x.lineWidth=2;for(let i=-H;i<W;i+=48){x.beginPath();x.moveTo(i,0);x.lineTo(i+H,H);x.stroke();}
+ x.save();x.translate(W*.76,H*.47);x.strokeStyle=accent;x.lineWidth=Math.max(3,W*.003);x.shadowColor=accent;x.shadowBlur=30;
+ x.beginPath();x.arc(0,0,Math.min(W,H)*.17,0,Math.PI*2);x.stroke();x.beginPath();x.ellipse(0,0,Math.min(W,H)*.24,Math.min(W,H)*.08,-.5,0,Math.PI*2);x.stroke();x.beginPath();x.ellipse(0,0,Math.min(W,H)*.24,Math.min(W,H)*.08,.5,0,Math.PI*2);x.stroke();
+ let orb=x.createRadialGradient(-30,-40,5,0,0,Math.min(W,H)*.2);orb.addColorStop(0,'#ffffff');orb.addColorStop(.12,accent);orb.addColorStop(1,'#090d1a');x.fillStyle=orb;x.beginPath();x.arc(0,0,Math.min(W,H)*.145,0,Math.PI*2);x.fill();x.restore();
+ const name=($('#name').value.trim()||'YOUR NAME').toUpperCase().split(/\s+/);const left=W*.075;let titleSize=type==='profile'?W*.085:type==='cover'?H*.25:W*.085;titleSize=Math.min(titleSize,150);
+ x.textAlign='left';x.direction='ltr';x.textBaseline='top';x.shadowColor='#000';x.shadowBlur=12;x.fillStyle='#f5f7ff';x.font=`900 ${titleSize}px Arial, sans-serif`;
+ let lines=name.slice(0,3);let startY=type==='profile'?H*.22:type==='cover'?H*.19:H*.25;
+ lines.forEach((line,i)=>x.fillText(line,left,startY+i*titleSize*1.03, W*.59));
+ x.shadowBlur=0;x.fillStyle='#d5def5';x.font=`600 ${Math.max(18,W*.018)}px Arial, sans-serif`;x.fillText(($('#subtitle').value||'GAMING CREATOR').toUpperCase(),left,startY+lines.length*titleSize*1.12,W*.65);
+ x.strokeStyle=accent;x.lineWidth=3;x.strokeRect(left,startY+lines.length*titleSize*1.12+Math.max(45,W*.055),Math.min(W*.42,Math.max(230,($('#tag').value.length+2)*W*.013)),Math.max(48,W*.04));
+ x.fillStyle=accent;x.font=`700 ${Math.max(16,W*.016)}px Arial, sans-serif`;x.fillText(($('#tag').value||'OFFICIAL').toUpperCase(),left+16,startY+lines.length*titleSize*1.12+Math.max(58,W*.064));
+ x.fillStyle='#aeb9d7';x.font=`600 ${Math.max(12,W*.009)}px Arial, sans-serif`;x.fillText('NEXDESIGN / ORIGINAL CREATION',W*.04,H*.94);
+ c.toBlob(blob=>{if(!blob)throw new Error('export');const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='nexdesign-gaming-design.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);btn.disabled=false;btn.textContent='⬇ دانلود تصویر PNG';},'image/png');
+ }catch(e){alert('ساخت تصویر انجام نشد؛ دوباره امتحان کن.');btn.disabled=false;btn.textContent='⬇ دانلود تصویر PNG';}
+});
+update();
+</script>
+</body></html>
